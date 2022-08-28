@@ -1,0 +1,14 @@
+{
+  "discounts": [
+    {
+      "name": "000003",
+      "label": "15%",
+      "value": 15
+    },
+    {
+      "name": "boots",
+      "label": "30%",
+      "value": 30
+    }
+  ]
+}

@@ -1,3 +1,3 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
+index_product:
+    path: /product
+    controller: App\Controller\ProductController::index
