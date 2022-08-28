@@ -16,13 +16,15 @@ class ProductController extends AbstractController
     private array $discountSku = ["000003", 15];
     private string $currencyCode = "EUR";
     private $doctrine;
+    private $serializer;
 
-    public function __construct(ManagerRegistry $doctrine)
+    public function __construct(ManagerRegistry $doctrine, SerializerInterface $serializer)
     {
         $this->doctrine = $doctrine;
+        $this->serializer = $serializer;
     }
 
-    public function index(Request $request, SerializerInterface $serializer)
+    public function index(Request $request)
     {
         $categoryFilter = $request->query->get('category');
         $priceFilter = $request->query->get('priceLessThan');
@@ -36,7 +38,7 @@ class ProductController extends AbstractController
             $product = $this->doctrine->getRepository(Product::class)->findAll();
         }
 
-        return new Response($serializer->serialize($product,'json'));
+        return new Response($this->serializer->serialize($product,'json'));
     }
 
     public function createProduct(): Response
@@ -62,7 +64,6 @@ class ProductController extends AbstractController
                 $price->setDiscountPercentage($this->discountCategory[1] . "%");
             }
             $price->setCurrency($this->currencyCode);
-            $entityManager->persist($price);
             $product->setPrice($price);
             $entityManager->persist($product);
         }

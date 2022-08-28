@@ -5,7 +5,7 @@ doctrine:
         host: localhost
         port: 3306
         user: root
-        password: 1234
+        password: avangers
         driver: pdo_mysql
 
         # IMPORTANT: You MUST configure your server version,
